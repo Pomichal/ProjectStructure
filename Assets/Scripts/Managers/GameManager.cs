@@ -13,7 +13,12 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(LoadScene("UIScene", new ShowScreenCommand()));
+        StartCoroutine(LoadScene("UIScene", new ShowScreenCommand<MenuScreen>()));
+    }
+
+    public void StartGame()
+    {
+        StartCoroutine(LoadScene("InGameScene", new ShowScreenCommand<InGameScreen>()));
     }
 
     IEnumerator LoadScene(string sceneName, ICommand afterSceneLoadedCommand)

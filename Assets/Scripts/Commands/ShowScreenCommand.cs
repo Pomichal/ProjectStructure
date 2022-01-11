@@ -1,7 +1,7 @@
-public class ShowScreenCommand : ICommand
+public class ShowScreenCommand<T> : ICommand
 {
     public void Execute()
     {
-        App.screenManager.Show<MenuScreen>();
+        App.screenManager.Show<T>();
     }
 }

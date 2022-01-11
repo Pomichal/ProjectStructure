@@ -4,4 +4,9 @@ using UnityEngine;
 
 public class MenuScreen : ScreenBase
 {
+    public void StartGame()
+    {
+        App.gameManager.StartGame();
+        Hide();
+    }
 }
