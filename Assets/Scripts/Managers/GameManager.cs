@@ -13,10 +13,10 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(LoadScene("UIScene"));
+        StartCoroutine(LoadScene("UIScene", new ShowScreenCommand()));
     }
 
-    IEnumerator LoadScene(string sceneName)
+    IEnumerator LoadScene(string sceneName, ICommand afterSceneLoadedCommand)
     {
         Debug.Log(sceneName);
         AsyncOperation op = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
@@ -30,5 +30,8 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
         // scene loaded
+
+        afterSceneLoadedCommand.Execute();
+
     }
 }
