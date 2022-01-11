@@ -21,9 +21,14 @@ public class GameManager : MonoBehaviour
         StartCoroutine(LoadScene("InGameScene", new ShowScreenCommand<InGameScreen>()));
     }
 
+    public void ReturnToMenu()
+    {
+        StartCoroutine(UnloadScene("InGameScene"));
+        App.screenManager.Show<MenuScreen>();
+    }
+
     IEnumerator LoadScene(string sceneName, ICommand afterSceneLoadedCommand)
     {
-        Debug.Log(sceneName);
         AsyncOperation op = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
         op.allowSceneActivation = false;
         while(!op.isDone)
@@ -35,8 +40,16 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
         // scene loaded
-
         afterSceneLoadedCommand.Execute();
+    }
 
+    IEnumerator UnloadScene(string sceneName)
+    {
+        AsyncOperation op = SceneManager.UnloadSceneAsync(sceneName);
+        while(!op.isDone)
+        {
+            yield return null;
+        }
+        // scene unloaded
     }
 }
