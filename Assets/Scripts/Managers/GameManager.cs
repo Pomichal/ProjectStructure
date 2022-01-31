@@ -27,13 +27,13 @@ public class GameManager : MonoBehaviour
         App.screenManager.Show<MenuScreen>();
     }
 
-    IEnumerator LoadScene(string sceneName, ICommand afterSceneLoadedCommand, bool activate=false)
+    IEnumerator LoadScene(string sceneName, ICommand afterSceneLoadedCommand, bool activate = false)
     {
         AsyncOperation op = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
         op.allowSceneActivation = false;
-        while(!op.isDone)
+        while (!op.isDone)
         {
-            if(op.progress >= 0.9f && !op.allowSceneActivation)
+            if (op.progress >= 0.9f && !op.allowSceneActivation)
             {
                 op.allowSceneActivation = true;
             }
@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
         }
         // scene loaded
 
-        if(activate)
+        if (activate)
             SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneName));
         afterSceneLoadedCommand.Execute();
     }
@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
     IEnumerator UnloadScene(string sceneName)
     {
         AsyncOperation op = SceneManager.UnloadSceneAsync(sceneName);
-        while(!op.isDone)
+        while (!op.isDone)
         {
             yield return null;
         }
