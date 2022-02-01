@@ -2,22 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-
-public enum UnitTypes
-{
-    Ranged, Melee
-}
 public class Definitions
 {
-    public Dictionary<UnitTypes, List<UnitBaseDefinition>> units = new Dictionary<UnitTypes, List<UnitBaseDefinition>>();
+    public Dictionary<string, UnitBaseDefinition> units = new Dictionary<string, UnitBaseDefinition>();
+    public List<LevelDefinition> levels = new List<LevelDefinition>();
     public Definitions()
     {
         App.definitions = this;
         LoadUnitDefintions();
+        LoadLevelDefintions();
     }
     private void LoadUnitDefintions()
     {
-        units[UnitTypes.Ranged] = Resources.LoadAll<UnitBaseDefinition>("Units/Ranged").ToList();
-        units[UnitTypes.Melee] = Resources.LoadAll<UnitBaseDefinition>("Units/Melee").ToList();
+        UnitBaseDefinition[] unitsArray = Resources.LoadAll<UnitBaseDefinition>("Units");
+        foreach (UnitBaseDefinition unit in unitsArray)
+        {
+            units.Add(unit.name, unit);
+        }
+    }
+    private void LoadLevelDefintions()
+    {
+        levels = Resources.LoadAll<LevelDefinition>("Levels").ToList();
     }
 }

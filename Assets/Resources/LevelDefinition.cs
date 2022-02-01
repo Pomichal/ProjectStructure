@@ -5,4 +5,5 @@ using UnityEngine;
 public class LevelDefinition : ScriptableObject
 {
     public List<WaveDefintion> waves;
+    public float spawnInterval;
 }

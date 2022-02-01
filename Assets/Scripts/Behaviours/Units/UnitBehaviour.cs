@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class UnitBehaviour : MonoBehaviour
 {
-    private void Awake()
+    protected UnitBaseModel model;
+    public void Init(UnitBaseModel model)
     {
-
+        this.model = model;
     }
 }
