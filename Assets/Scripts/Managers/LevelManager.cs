@@ -6,6 +6,8 @@ public class LevelManager : MonoBehaviour
 {
 
     [SerializeField] private Placable towerPlaceholderPrefab;
+    [SerializeField] private Transform waypointsHolder;
+    public List<Transform> Waypoints { get; private set; }
 
     private Placable buildingToPlace;
     private Camera mainCamera;
@@ -18,8 +20,16 @@ public class LevelManager : MonoBehaviour
         App.levelManager = this;
         mainCamera = Camera.main;
         GetEnemyPrefabs();
+        PopulateWaypoints();
     }
-
+    private void PopulateWaypoints()
+    {
+        Waypoints = new List<Transform>();
+        foreach (Transform waypoint in waypointsHolder)
+        {
+            Waypoints.Add(waypoint);
+        }
+    }
     public void Init()
     {
         CreateLevel();
@@ -81,6 +91,7 @@ public class LevelManager : MonoBehaviour
             //TODO: list?
             UnitBehaviour instance = Instantiate(enemyPrefabs[wave.enemy.ToString()], Vector3.zero, Quaternion.identity); //TODO: random pos, pre-defined pos
             instance.Init(model);
+            instance.name = "Enemy " + i;
         }
         yield break;
     }
