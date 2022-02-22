@@ -10,7 +10,11 @@ public class BuildingShopItem : MenuItem
     {
         base.Init(data);
         nameText.text = (string)data["name"];
-        var model = App.models.TowerFactory.Factory((TowerDefinition)data["data"]);
-        var instance = Instantiate(model.towerDefinition.prefab);
+    }
+    public void Buy()
+    {
+        TowerModel model = App.models.TowerFactory.Factory((TowerDefinition)data["data"]);
+        Placable instance = Instantiate(model.towerDefinition.prefab);
+        instance.Init(model);
     }
 }

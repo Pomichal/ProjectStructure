@@ -13,4 +13,8 @@ public class BasicTowerModel : TowerModel
     {
         return (int)(damage * definition.damage);
     }
+    public float AttackSpeed()
+    {
+        return definition.attackSpeed * 1.5f;
+    }
 }

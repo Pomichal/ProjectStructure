@@ -44,6 +44,9 @@ public class GameManager : MonoBehaviour
         if (activate)
             SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneName));
         afterSceneLoadedCommand.Execute();
+
+        App.screenManager.Show<WaveSetupScreen>();
+        App.screenManager.Hide<WaveSetupScreen>();
     }
 
     IEnumerator UnloadScene(string sceneName)

@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: BasicTower
   m_EditorClassIdentifier: 
   damage: 100
-  attackSpeed: 1100
+  attackSpeed: 1
   health: 5000
+  prefab: {fileID: -8718891043939340127, guid: 78d84713032d2c1a5a78e8c915f3dd90, type: 3}
