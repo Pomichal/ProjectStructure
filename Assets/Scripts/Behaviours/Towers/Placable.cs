@@ -5,11 +5,22 @@ using UnityEngine;
 
 public class Placable : MonoBehaviour
 {
+    [SerializeField] private ProjectileBehaviour projectilePrefab;
+    [SerializeField] private Transform shootPosition;
+
     private Vector3 newPos;
+
+    private List<Transform> enemiesInRange = new List<Transform>();
+
+    protected WaitForSeconds waitForSeconds;
 
     private void Start()
     {
         StartCoroutine(MoveCoroutine());
+    }
+    public virtual void Init(TowerModel model)
+    {
+
     }
     public void Move(Vector3 pos)
     {
@@ -29,5 +40,27 @@ public class Placable : MonoBehaviour
             transform.position = pos;
             yield return new WaitForEndOfFrame();
         }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        enemiesInRange.Add(other.transform);
+        if (enemiesInRange.Count <= 1)
+        {
+            StartCoroutine(AttackCoroutine());
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        enemiesInRange.Remove(other.transform);
+    }
+    private IEnumerator AttackCoroutine()
+    {
+        while (enemiesInRange.Count > 0)
+        {
+            var instance = Instantiate(projectilePrefab, shootPosition);
+            instance.Init(enemiesInRange[0], 3);
+            yield return waitForSeconds;
+        }
+        yield break;
     }
 }
