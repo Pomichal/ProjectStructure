@@ -4,14 +4,7 @@ using UnityEngine;
 
 public class Player
 {
-    private int coins;
-    private int currentLevel;
-    public int GetCoins()
-    {
-        return coins;
-    }
-    public void SetCoins(int amount)
-    {
-        coins += amount;
-    }
+    public int Coins { get; set; }
+    public int CurrentLevel { get; set; }
+    public int Sessions { get; set; }
 }
