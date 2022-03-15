@@ -6,3 +6,8 @@ public enum Tower
 {
     Basic
 }
+
+public enum Music
+{
+    Menu, InGame
+}

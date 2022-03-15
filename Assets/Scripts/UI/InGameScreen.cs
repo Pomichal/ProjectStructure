@@ -5,6 +5,13 @@ using UnityEngine.UI;
 
 public class InGameScreen : ScreenBase
 {
+
+    public override void Show()
+    {
+        base.Show();
+        App.musicManager.SetMusic(Music.InGame);
+    }
+
     public void ReturnToMenu()
     {
         App.gameManager.ReturnToMenu();
